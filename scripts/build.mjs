@@ -1,0 +1,10 @@
+import { mkdir, readFile, writeFile, cp } from 'node:fs/promises';
+await mkdir('dist/server', {recursive:true});
+await mkdir('dist/.openai', {recursive:true});
+const html = await readFile('public/index.html','utf8');
+const worker = await readFile('worker/entry.js','utf8');
+const api = (await readFile('worker/api.js','utf8')).replace('export async function api', 'async function api');
+await writeFile('dist/server/index.js', api + '\n' + worker.replace("import { api } from './api.js';", '').replace('/* EMBED_PAGE */', JSON.stringify(html)));
+await cp('.openai/hosting.json','dist/.openai/hosting.json');
+await cp('drizzle','dist/drizzle',{recursive:true});
+console.log('Built dist/server/index.js');
