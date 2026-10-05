@@ -1,1 +1,1 @@
-window.WISHBOX_API = 'https://futuer-wishbox.misty-clock-3308.chatgpt.site';
+window.WISHBOX_API = 'https://futuer-wishbox.guoyi406203.chatgpt.site';
